@@ -2,7 +2,7 @@
 #include "encoders.h"
 #include "motors.h"
 
-const float kP = 0.1;
+const float kP = 0.6;
 
 const int turnRadius = 74; // distance from wheel to wheel in mm
 
@@ -33,11 +33,11 @@ void moveMM(float dist) {
 
 void turnDeg(float deg) {
     if (deg < 0) {
-        float requestedWheelDistMM = (abs(deg) / 360 * 2 * PI * turnRadius) + getLeftDistMM();
+        float requestedWheelDistMM = (abs(deg) / 360.0 * 2.0 * PI * turnRadius) + getLeftDistMM();
+
         while (getLeftDistMM() < requestedWheelDistMM) {
             float error = abs(requestedWheelDistMM - getLeftDistMM());
             float calcPID = error * kP;
-
             setLeftPWM(calcPID);
         } 
     }
@@ -46,7 +46,6 @@ void turnDeg(float deg) {
         while (getRightDistMM() < requestedWheelDistMM) {
             float error = abs(requestedWheelDistMM - getRightDistMM());
             float calcPID = error * kP;
-
             setRightPWM(calcPID);
         }
     }
