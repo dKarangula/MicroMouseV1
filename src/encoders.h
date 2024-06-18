@@ -1,5 +1,5 @@
 void initializeEncoders();
 void updateLeftEncoderCount();
 void updateRightEncoderCount();
-int getLeftEncoderCount();
-int getRightEncoderCount();
+float getLeftDistMM();
+float getRightDistMM();
